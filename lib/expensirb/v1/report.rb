@@ -3,7 +3,7 @@ require 'expensirb/v1/constants'
 
 module Expensirb
   class Report
-    
+
     def export(method, opts={})
       requestJobDescription = {}
       requestJobDescription[:type] = "file"
@@ -34,7 +34,7 @@ module Expensirb
       # template
       requestJobDescription[:template] = template
 
-      final_json = requestJobDescription.to_json
+      final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
@@ -54,7 +54,7 @@ module Expensirb
 
       requestJobDescription[:inputSettings] = inputSettings
 
-      final_json = requestJobDescription.to_json
+      final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
 
@@ -70,7 +70,7 @@ module Expensirb
       inputSettings[:status] = opts[:status]
       requestJobDescription[:inputSettings] = inputSettings
 
-      final_json = requestJobDescription.to_json
+      final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
 
@@ -80,7 +80,7 @@ module Expensirb
       requestJobDescription[:credentials] = Expensirb::Constants::CREDENTIALS
       requestJobDescription[:fileName] = opts[:fileName]
 
-      final_json = requestJobDescription.to_json
+      final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end

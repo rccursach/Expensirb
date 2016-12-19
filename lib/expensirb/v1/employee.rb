@@ -13,7 +13,7 @@ module Expensirb
       inputSettings[:policyID] = opts[:policyID]
       requestJobDescription[:inputSettings] = inputSettings
 
-      final_json = requestJobDescription.to_json
+      final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
 
       cols = opts[:column_headers]
       data << cols.join(',')

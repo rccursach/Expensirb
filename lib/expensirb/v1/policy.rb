@@ -14,7 +14,7 @@ module Expensirb
       inputSettings[:plan] = opts[:plan] unless opts[:plan].nil?
       requestJobDescription[:inputSettings] = inputSettings
 
-      final_json = requestJobDescription.to_json
+      final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
@@ -33,7 +33,7 @@ module Expensirb
       inputSettings[:policyID] = opts[:policyID]
       requestJobDescription[:inputSettings] = inputSettings
 
-      final_json = requestJobDescription.to_json
+      final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
