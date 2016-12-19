@@ -19,7 +19,6 @@ module Expensirb
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
 
-
     def update(method, opts={})
       requestJobDescription = {}
       requestJobDescription[:type] = "update"
@@ -38,6 +37,5 @@ module Expensirb
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
-
   end
 end

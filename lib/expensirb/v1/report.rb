@@ -1,9 +1,9 @@
 require 'json'
+require 'expensirb/v1/constants'
 
 module Expensirb
   class Report
-
-
+    
     def export(method, opts={})
       requestJobDescription = {}
       requestJobDescription[:type] = "file"
@@ -11,7 +11,6 @@ module Expensirb
       requestJobDescription[:test] = opts[:test] unless opts[:test].nil?
       requestJobDescription[:limit] = opts[:limit] unless opts[:limit].nil?
       requestJobDescription[:onFinish] = opts[:onFinish] unless opts[:onFinish].nil?
-
 
       # onReceive
       requestJobDescription[:onReceive] = opts[:onReceive]
@@ -35,18 +34,7 @@ module Expensirb
       # template
       requestJobDescription[:template] = template
 
-
       final_json = requestJobDescription.to_json
-
-
-
-
-
-
-
-
-
-
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
@@ -55,7 +43,6 @@ module Expensirb
       requestJobDescription = {}
       requestJobDescription[:type] = "create"
       requestJobDescription[:credentials] = Expensirb::Constants::CREDENTIALS
-
 
       # inputSettings
       inputSettings = {}
@@ -71,13 +58,10 @@ module Expensirb
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
 
-
     def status_update(method, opts={})
       requestJobDescription = {}
       requestJobDescription[:type] = "update"
       requestJobDescription[:credentials] = Expensirb::Constants::CREDENTIALS
-
-
 
       # inputSettings
       inputSettings = {}
@@ -89,9 +73,6 @@ module Expensirb
       final_json = requestJobDescription.to_json
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
-
-
-
 
     def download(method, opts={})
       requestJobDescription = {}

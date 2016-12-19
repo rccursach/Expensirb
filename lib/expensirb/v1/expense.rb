@@ -16,9 +16,6 @@ module Expensirb
       final_json = requestJobDescription.to_json
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
-
     end
-
-
   end
 end

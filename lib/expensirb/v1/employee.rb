@@ -2,7 +2,6 @@
 module Expensirb
   class Employee
 
-
     def update(method, opts={})
       requestJobDescription = {}
       requestJobDescription[:type] = "create"
@@ -22,7 +21,6 @@ module Expensirb
         data << i.join(',')
       end
       Expensirb.make_request method, Expensirb::Constants::API_URL, parameters: [final_json, data]
-
     end
   end
 end
