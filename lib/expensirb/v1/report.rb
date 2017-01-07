@@ -18,23 +18,25 @@ module Expensirb
       # inputSettings
       inputSettings = {}
       inputSettings[:type] = "combinedReportData"
-      inputSettings[:filters] = opts[:filters]
-      inputSettings[:reportState] = opts[:reportState] unless opts[:reportState].nil?
-      inputSettings[:employeeEmail] = opts[:employeeEmail] unless opts[:employeeEmail].nil?
+      inputSettings[:filters] = opts[:inputSettings][:filters]
+      inputSettings[:reportState] = opts[:inputSettings][:reportState] unless opts[:inputSettings][:reportState].nil?
+      inputSettings[:employeeEmail] = opts[:inputSettings][:employeeEmail] unless opts[:inputSettings][:employeeEmail].nil?
       requestJobDescription[:inputSettings] = inputSettings
 
       # outputSettings
 
       outputSettings = {}
-      outputSettings[:fileExtension] = opts[:fileExtension]
-      outputSettings[:fileBasename] = opts[:fileBasename] unless opts[:fileBasename].nil?
-      outputSettings[:includeFullPageReceiptsPdf] = opts[:includeFullPageReceiptsPdf] unless opts[:includeFullPageReceiptsPdf].nil?
+      outputSettings[:fileExtension] = opts[:outputSettings][:fileExtension]
+      outputSettings[:fileBasename] = opts[:outputSettings][:fileBasename] unless opts[:outputSettings][:fileBasename].nil?
+      outputSettings[:includeFullPageReceiptsPdf] = opts[:outputSettings][:includeFullPageReceiptsPdf] unless opts[:outputSettings][:includeFullPageReceiptsPdf].nil?
       requestJobDescription[:outputSettings] = outputSettings
 
       # template
-      requestJobDescription[:template] = template
+      requestJobDescription[:template] = opts[:template].nil? ? "" : opts[:template]
 
       final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
+
+      puts final_json
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
