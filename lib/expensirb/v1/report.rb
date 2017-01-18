@@ -4,7 +4,7 @@ require 'expensirb/v1/constants'
 module Expensirb
   class Report
 
-    def export(method, opts={}, template = nil)
+    def export(method, opts={}, template)
       requestJobDescription = {}
       requestJobDescription[:type] = "file"
       requestJobDescription[:credentials] = Expensirb::Constants::CREDENTIALS
@@ -31,14 +31,11 @@ module Expensirb
       outputSettings[:includeFullPageReceiptsPdf] = opts[:outputSettings][:includeFullPageReceiptsPdf] unless opts[:outputSettings][:includeFullPageReceiptsPdf].nil?
       requestJobDescription[:outputSettings] = outputSettings
 
-      # template
-      requestJobDescription[:template] = opts[:template].nil? ? "" : opts[:template]
-
       final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
 
       puts final_json
 
-      Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
+      Expensirb.make_request method, Expensirb::Constants::API_URL, final_json, template
     end
 
     def create(method, opts={})
@@ -57,7 +54,7 @@ module Expensirb
       requestJobDescription[:inputSettings] = inputSettings
 
       final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
-      Expensirb.make_request method, Expensirb::Constants::API_URL, final_json, template
+      Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
     end
 
     def status_update(method, opts={})
@@ -84,7 +81,7 @@ module Expensirb
 
       final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
 
-      Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
+      Expensirb.make_request method, Expensirb::Constants::API_URL, final_json, nil
     end
   end
 end

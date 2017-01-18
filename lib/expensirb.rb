@@ -22,11 +22,13 @@ module Expensirb
     Expensirb::Expense.new
   end
 
-  def self.make_request(method, url, parameters, template = nil)
+  def self.make_request(method, url, parameters, template)
     begin
       # first append template if exists
-      url += ("?" + template.to_s) unless template.nil?
-      JSON.parse(RestClient.send(method, url, parameters))
+      url += ("?template=" + template.to_s) unless template.nil?
+      # puts "#{method}ing to this url: #{url}"
+      # JSON.parse(RestClient.send(method, url, parameters))
+      RestClient.send(method, url, parameters)
     rescue RestClient::ExceptionWithResponse => e
       handle_api_error(e)
     end
