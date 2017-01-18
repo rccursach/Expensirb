@@ -33,7 +33,7 @@ module Expensirb
 
       final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
 
-      puts final_json
+      #puts final_json
 
       Expensirb.make_request method, Expensirb::Constants::API_URL, final_json, template
     end
