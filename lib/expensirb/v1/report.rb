@@ -4,7 +4,7 @@ require 'expensirb/v1/constants'
 module Expensirb
   class Report
 
-    def export(method, opts={})
+    def export(method, opts={}, template = nil)
       requestJobDescription = {}
       requestJobDescription[:type] = "file"
       requestJobDescription[:credentials] = Expensirb::Constants::CREDENTIALS
@@ -57,7 +57,7 @@ module Expensirb
       requestJobDescription[:inputSettings] = inputSettings
 
       final_json = Expensirb::Constants::PARAMS_PREFIX + requestJobDescription.to_json
-      Expensirb.make_request method, Expensirb::Constants::API_URL, final_json
+      Expensirb.make_request method, Expensirb::Constants::API_URL, final_json, template
     end
 
     def status_update(method, opts={})
